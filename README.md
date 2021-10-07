@@ -35,11 +35,14 @@ This plugin contains two features:
 ### VueOfflineMixin
 Global mixin that'll add following properties to every component in your application:
 
-- `isOnline` & `isOffline` data properties
+- `isOnline`
+- `isOffline`
+- `showOnline`
 ````html
 <template>
     <p v-if="isOnline">This part will be visible only if user is online</p>
     <p v-if="isOffline">This part will be visible only if user is offline</p>
+    <p v-if="showOnline">This part will be visible only if user is back online and then this it will be disappear</p>
 </template>
 ````
 ````js
@@ -52,7 +55,7 @@ export default {
     }
 }
 ````
-- `online` and `offline` events in every component
+- `online`, `offline` and other events in every component
 ````js
 export default {
     name: 'MyComponent',

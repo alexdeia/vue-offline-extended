@@ -11,6 +11,7 @@ export const VueOfflineMixin = {
     return {
       isOnline: false,
       isOffline: false,
+      showOnline: false,
     };
   },
   mounted() {
@@ -37,6 +38,14 @@ export const VueOfflineMixin = {
         window.removeEventListener('offline', offlineHandler);
       });
     }
+  },
+  watch: {
+    isOffline(status) {
+      if (!status) {
+        this.showOnline = true;
+        setTimeout(() => (this.showOnline = false), 3000);
+      }
+    },
   },
 };
 
