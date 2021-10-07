@@ -1,11 +1,13 @@
 {
   "name": "vue-offline-extended",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Offline states, storage and other tools for Vue.js apps and Progressive Web Apps",
-  "main": "lib/vue-offline.js",
+  "main": "lib/vue-offline-extended.js",
   "scripts": {
+    "clean": "rimraf lib",
     "build": "webpack --env dev && webpack --env build",
-    "dev": "webpack --progress --colors --watch --env dev"
+    "dev": "webpack --progress --colors --watch --env dev",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
@@ -42,6 +44,7 @@
     "jsdom": "17.0.0",
     "jsdom-global": "3.0.2",
     "mocha": "^9.1.2",
+    "rimraf": "^3.0.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.57.1",
     "webpack-cli": "^4.8.0",

@@ -1,13 +1,18 @@
-# Vue Offline
+# Vue Offline extended version
 
 This library allows you to enhance offline capabilities of your Vue.js application. It's especially useful when you're building offline-first Progressive Web Apps or just want to inform your users that they lost internet connection. 
 
-**TL;DR** Adds `isOnline` `isOffline` data properties, `online`, `offline` events via global mixin and enables offline storage via `Vue.$offlineStorage` based on Local Storage
+**TL;DR** Adds `isOnline` `isOffline` data properties, `online`, `offline` events via global mixin and enables offline storage via `Vue.$offlineStorage` based on [localforage](https://github.com/localForage/localForage) library.
 
-- [Installation](#installation)
-- [Capabilities](#capabilities)
+This library is fork of original [vue-offline](https://github.com/filrak/vue-offline). Thanks to Filip Rakowski.
+
+- [Vue Offline extended version](#vue-offline-extended-version)
+  - [Installation](#installation)
+  - [Capabilities](#capabilities)
     - [VueOfflineMixin](#vueofflinemixin)
+    - [Additional configuration](#additional-configuration)
     - [VueOfflineStorage](#vueofflinestorage)
+    - [Additional configuration](#additional-configuration-1)
 
 Initially made for [Vue Storefront](https://github.com/DivanteLtd/vue-storefront)
 
@@ -88,12 +93,9 @@ export default {
 }
 ````
 ### VueOfflineStorage 
- Offline storage that uses [local storage](https://developer.mozilla.org/pl/docs/Web/API/Window/localStorage) to persist data for offline usage and caching. It's a perfect choice for offline-first PWA. You can use it as a fallback for failed network requests or a local cache. 
+ Offline storage that uses [localforage](https://github.com/localForage/localForage) to persist data for offline usage and caching.
 
-The storage object has following properties: 
-- `set(key, value)` - puts (or updates if already exists) `value` into storage under key `key`.
-- `get(key)` - returns value stored under key `key`
-- `keys` - return array of keys existing in your offline storage
+The storage object has following properties as localforage [data-api](http://localforage.github.io/localForage/#data-api).
 
 To use this storage inside your app you can either
 -  use `this.$offlineStorage` from Vue instance property in your components:
@@ -116,7 +118,15 @@ export default {
 ````js
 import { VueOfflineStorage } from 'vue-offline'
 
-const cachedData = VueOfflineStorage.get('cached-data')
+try {
+    const cachedData = await VueOfflineStorage.getItem('cached-data');
+    // This code runs once the value has been loaded
+    // from the offline store.
+    console.log(value);
+} catch (err) {
+    // This code runs if there were any errors.
+    console.log(err);
+}
 
 ````
 ### Additional configuration

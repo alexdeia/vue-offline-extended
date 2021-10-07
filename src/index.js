@@ -42,12 +42,6 @@ export const VueOfflineMixin = {
 
 /* ----------------------- Storage ------------------------ */
 
-function _addKey(newKey) {
-  let keys = JSON.parse(localStorage.getItem('VueOfflineStorageKeys')) || [];
-  if (!keys.includes(newKey)) keys.push(newKey);
-  localStorage.setItem('VueOfflineStorageKeys', JSON.stringify(keys));
-}
-
 export const VueOfflineStorage = {
   init(options = {}) {
     const localforageInstances = localforage.createInstance(options);
