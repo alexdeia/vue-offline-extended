@@ -19,12 +19,12 @@ Initially made for [Vue Storefront](https://github.com/DivanteLtd/vue-storefront
 ## Installation
 To install this package as a plugin just type:
 ````
-npm install vue-offline --save
+yarn add vue-offline-extended
 ````
 
 and add it into your application with
 ````js
-import VueOffline from 'vue-offline'
+import VueOffline from 'vue-offline-extended'
 
 Vue.use(VueOffline)
 ````
@@ -78,7 +78,7 @@ Vue.use(VueOffline, {
 
 You can still make use of `VueOfflineMixin` by injecting it directly into your components:
 ````js 
-import { VueOfflineMixin } from 'vue-offline'
+import { VueOfflineMixin } from 'vue-offline-extended'
 
 export default {
     name: 'MyComponent',
@@ -119,7 +119,7 @@ export default {
 ````
 - import the `VueOfflineStorage` instance if you want to use it somewhere else (e.g. Vuex store)
 ````js
-import { VueOfflineStorage } from 'vue-offline'
+import { VueOfflineStorage } from 'vue-offline-extended'
 
 try {
     const cachedData = await VueOfflineStorage.getItem('cached-data');
@@ -143,7 +143,7 @@ Vue.use(VueOffline, {
 
 You can still make use of `VueOfflineStorage` by importing it directly into your components:
 ````js 
-import { VueOfflineStorage } from 'vue-offline'
+import { VueOfflineStorage } from 'vue-offline-extended'
 
 export default {
     name: 'MyComponent',
