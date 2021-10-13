@@ -68,6 +68,7 @@ export const VueOfflineStorage = {
 
       localforageInstances[name] = localforage.createInstance(instance);
     }
+    return localforageInstances;
   },
 };
 

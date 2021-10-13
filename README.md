@@ -2,7 +2,7 @@
 
 This library allows you to enhance offline capabilities of your Vue.js application. It's especially useful when you're building offline-first Progressive Web Apps or just want to inform your users that they lost internet connection. 
 
-**TL;DR** Adds `isOnline` `isOffline` data properties, `online`, `offline` events via global mixin and enables offline storage via `Vue.$offlineStorage` based on [localforage](https://github.com/localForage/localForage) library.
+**TL;DR** Adds `isOnline` `isOffline` `showOnline` data properties, `online`, `offline` events via global mixin and enables offline storage via `Vue.$offlineStorage` based on [localforage](https://github.com/localForage/localForage) library.
 
 This library is fork of original [vue-offline](https://github.com/filrak/vue-offline). Thanks to Filip Rakowski.
 
@@ -105,13 +105,13 @@ To use this storage inside your app you can either
 ````js
 export default {
     methods: {
-        getUserData () {
+        async getUserData () {
             if (this.isOnline) {
                 // make network request that returns 'userData' object
                 this.appData = userData
-                this.$offlineStorage.set('user', userData)
+                await this.$offlineStorage.setItem('user', userData)
             } else {
-                this.appData = this.$offlineStorage.get('user')
+                await this.appData = this.$offlineStorage.getItem('user')
             }
         }
     }
@@ -148,15 +148,58 @@ import { VueOfflineStorage } from 'vue-offline-extended'
 export default {
     name: 'MyComponent',
     methods: {
-        getUserData () {
+        async getUserData () {
             if (this.isOnline) {
                 // make network request that returns 'userData' object
                 this.appData = userData
-                VueOfflineStorage.set('user', userData)
+                await this.$offlineStorage.setItem('user', userData)
             } else {
-                this.appData = VueOfflineStorage.get('user')
+                await this.appData = this.$offlineStorage.getItem('user')
             }
         }
     }
 }
 ````
+
+Create single store instance
+```js
+Vue.use(VueOffline, {
+  storage: {
+    name: 'db-name',
+    storeName: 'store',
+  },
+});
+
+...
+
+// Get item
+await this.$offlineStorage.getItem(key)
+```
+
+
+Create multiple store instances (stores)
+```js
+Vue.use(VueOffline, {
+  storage: {
+    instances: [
+      {
+        name: 'db-name',
+        storeName: 'store-one',
+      },
+      {
+        name: 'db-name',
+        storeName: 'store-two',
+      },
+    ],
+  },
+});
+
+...
+
+// for store-one
+await this.$offlineStorage['store-one'].getItem(key)
+
+// for store-two
+await this.$offlineStorage['store-two'].setItem(key, value)
+```
+
