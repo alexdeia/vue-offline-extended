@@ -1,4 +1,8 @@
 import localforage from 'localforage';
+import { extendPrototype } from 'localforage-getitems';
+
+/* ----------------------- Register modules ------------------------ */
+extendPrototype(localforage);
 
 /* ----------------------- Mixin ------------------------ */
 
