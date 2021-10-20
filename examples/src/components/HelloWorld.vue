@@ -50,7 +50,7 @@ export default {
     }
   },
   async created() {
-    this.valueFromFirstStorage = await this.$offlineStorage['store-one'].getItem('first-key');
+    this.valueFromFirstStorage = await this.$offlineStorage['store-one'].getItems();
     this.valueFromSecondStorage = await this.$offlineStorage['store-two'].getItem('second-key');
   },
 }

@@ -16,6 +16,8 @@ export default {
   async created() {
     await this.$offlineStorage['store-one'].setItem('first-key', 'first-value');
     await this.$offlineStorage['store-two'].setItem('second-key', 'second-value');
+    console.log(this.$offlineStorage);
+    console.log(this.$offlineStorage['store-one']);
   }
 }
 </script>
