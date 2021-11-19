@@ -1,6 +1,6 @@
 {
   "name": "vue-offline-extended",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Offline states, storage and other tools for Vue.js apps and Progressive Web Apps",
   "main": "lib/vue-offline-extended.js",
   "scripts": {
