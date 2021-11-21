@@ -94,7 +94,7 @@ export const VueOfflinePlugin = {
       ...options,
     };
     if (pluginOptions.storage)
-      Vue.prototype.$offlineStorage = VueOfflineStorage.init(options.storage);
+      Vue.$offlineStorage = Vue.prototype.$offlineStorage = VueOfflineStorage.init(options.storage);
       Vue.prototype.$offlineStorage.createInstance = (instance) => {
         const name = instance.storeName || instance.name
         Vue.prototype.$offlineStorage[name] = localforage.createInstance(instance);
